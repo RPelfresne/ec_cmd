@@ -1,10 +1,19 @@
-def on_received_string(receivedString):
-    basic.show_string(receivedString)
-radio.on_received_string(on_received_string)
-
-radio.set_group(1)
-basic.show_icon(IconNames.SMALL_DIAMOND)
+nbLeds = 133
+strip = neopixel.create(DigitalPin.P1, nbLeds, NeoPixelMode.RGB)
+strip.set_brightness(50)
+basic.show_icon(IconNames.YES)
 
 def on_forever():
-    pass
+    strip.show_color(neopixel.colors(NeoPixelColors.BLACK))
+    basic.pause(100)
+    strip.show()
+    basic.pause(5000)
+    strip.show_color(neopixel.colors(NeoPixelColors.BLUE))
+    basic.pause(100)
+    strip.show()
+    basic.pause(5000)
+    strip.show_color(neopixel.colors(NeoPixelColors.RED))
+    basic.pause(100)
+    strip.show()
+    basic.pause(5000)
 basic.forever(on_forever)

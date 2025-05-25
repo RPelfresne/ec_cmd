@@ -1,95 +1,38 @@
-radio.onReceivedString(function (receivedString) {
-    if (receivedString == "B") {
-        etat_suivant = 1
-    } else if (receivedString == "R" && etat == 9) {
-        etat_suivant = 2
-    } else if (receivedString == "S") {
-        etat_suivant = 3
-    } else if (receivedString == "A") {
-        etat_suivant = 4
-    }
-})
-let etat_suivant = 0
-let etat = 0
-radio.setGroup(1)
-etat = 0
-etat_suivant = 0
-basic.showIcon(IconNames.SmallDiamond)
+let nbLeds = 133
+let dureeMontee = 20000
+let strip = neopixel.create(DigitalPin.P1, nbLeds, NeoPixelMode.RGB)
+let pauseEntreLeds = dureeMontee / nbLeds
+basic.pause(100)
+strip.showColor(neopixel.colors(NeoPixelColors.Black))
+basic.pause(100)
+strip.setBrightness(40)
+basic.pause(100)
+strip.show()
+basic.pause(100)
 basic.forever(function () {
-    etat = etat_suivant
-    if (etat == 1) {
-        basic.showLeds(`
-            . . . . .
-            . . . . .
-            . . . . .
-            . . . . .
-            . . . . #
-            `)
-        basic.pause(500)
-        basic.showLeds(`
-            . . . . .
-            . . . . .
-            . . . . .
-            . . . . #
-            . . . . #
-            `)
-        basic.pause(500)
-        basic.showLeds(`
-            . . . . .
-            . . . . .
-            . . . . #
-            . . . . #
-            . . . . #
-            `)
-        basic.pause(500)
-        basic.showLeds(`
-            . . . . .
-            . . . . #
-            . . . . #
-            . . . . #
-            . . . . #
-            `)
-        basic.pause(500)
-        basic.showLeds(`
-            . . . . #
-            . . . . #
-            . . . . #
-            . . . . #
-            . . . . #
-            `)
-        basic.pause(500)
-        etat = 9
-    } else if (etat == 2) {
-        basic.showLeds(`
-            . . . # #
-            . . . # #
-            . . . # #
-            . . . # #
-            . . . # #
-            `)
-        etat = 0
-    } else if (etat == 3) {
-        basic.showLeds(`
-            . . # . #
-            . . # . #
-            . . # . #
-            . . # . #
-            . . # . #
-            `)
-        basic.showLeds(`
-            . . . . .
-            . . . . .
-            . . . . .
-            . . . . .
-            . . . . .
-            `)
-    } else if (etat == 4) {
-        basic.showLeds(`
-            . . . . .
-            . . . . .
-            . . . . .
-            . . . . .
-            . . . . .
-            `)
+    strip.showColor(neopixel.colors(NeoPixelColors.Black))
+    basic.pause(200)
+    strip.show()
+    basic.pause(2000)
+    for (let index = 0; index < pauseEntreLeds; index++) {
+        strip.shift(1)
+        strip.setPixelColor(0, neopixel.colors(NeoPixelColors.Blue))
+        basic.pause(100)
+        strip.show()
+        basic.pause(100)
+    }
+    strip.showColor(neopixel.colors(NeoPixelColors.Blue))
+    basic.pause(200)
+    strip.show()
+    basic.pause(2000)
+    strip.showColor(neopixel.colors(NeoPixelColors.Red))
+    basic.pause(200)
+    strip.show()
+    basic.pause(2000)
+    for (let index = 0; index < 4; index++) {
+        strip.showColor(neopixel.colors(NeoPixelColors.White))
+        basic.pause(100)
+        strip.showColor(neopixel.colors(NeoPixelColors.Black))
+        basic.pause(100)
     }
 })
