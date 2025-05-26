@@ -39,17 +39,31 @@ basic.forever(function () {
         basic.pause(200)
         strip.show()
         basic.pause(2000)
+    } else if (etat == 4) {
+        for (let index = 0; index < 5; index++) {
+            strip.showColor(neopixel.colors(NeoPixelColors.White))
+            basic.pause(100)
+            strip.showColor(neopixel.colors(NeoPixelColors.Black))
+            basic.pause(100)
+        }
+    } else if (etat == 5) {
+        strip.showColor(neopixel.colors(NeoPixelColors.Black))
+        basic.pause(200)
+        strip.show()
+        basic.pause(2000)
     } else {
     	
     }
-    if (etat == 0) {
-        if (msg_lu == "B") {
-            etat_suivant = 1
-        }
+    if (etat == 0 && msg_lu == "B") {
+        etat_suivant = 1
     } else if (etat == 1) {
         etat_suivant = 2
     } else if (etat == 2 && msg_lu == "R") {
         etat_suivant = 3
+    } else if (etat == 3 && msg_lu == "S") {
+        etat_suivant = 4
+    } else if (etat == 4 && msg_lu == "A") {
+        etat_suivant = 5
     } else {
     	
     }
