@@ -34,6 +34,11 @@ basic.forever(function () {
         }
     } else if (etat == 2) {
     	
+    } else if (etat == 3) {
+        strip.showColor(neopixel.colors(NeoPixelColors.Red))
+        basic.pause(200)
+        strip.show()
+        basic.pause(2000)
     } else {
     	
     }
