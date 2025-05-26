@@ -43,6 +43,8 @@ basic.forever(function () {
         }
     } else if (etat == 1) {
         etat_suivant = 2
+    } else if (etat == 2 && msg_lu == "R") {
+        etat_suivant = 3
     } else {
     	
     }
