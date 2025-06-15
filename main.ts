@@ -26,6 +26,7 @@ basic.forever(function () {
         basic.pause(200)
         strip.show()
         basic.pause(500)
+        radio.sendString("DB")
         for (let index = 0; index < nbLeds; index++) {
             strip.shift(1)
             strip.setPixelColor(0, neopixel.colors(NeoPixelColors.Blue))
@@ -35,8 +36,9 @@ basic.forever(function () {
         }
         monteeFinie = 1
     } else if (etat == 2) {
-    	
+        radio.sendString("FB")
     } else if (etat == 3) {
+        radio.sendString("DR")
         strip.showColor(neopixel.colors(NeoPixelColors.Red))
         basic.pause(200)
         strip.show()
