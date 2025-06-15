@@ -2,10 +2,11 @@ radio.onReceivedString(function (receivedString) {
     msg = receivedString
 })
 let msg_lu = ""
-let msg = ""
-radio.setGroup(1)
 let etat_suivant = 0
 let etat = 0
+let msg = ""
+let monteeFinie = 0
+radio.setGroup(1)
 let nbLeds = 133
 let dureeMontee = 20000
 let strip = neopixel.create(DigitalPin.P1, nbLeds, NeoPixelMode.RGB)
@@ -24,14 +25,15 @@ basic.forever(function () {
         strip.showColor(neopixel.colors(NeoPixelColors.Black))
         basic.pause(200)
         strip.show()
-        basic.pause(2000)
-        for (let index = 0; index < pauseEntreLeds; index++) {
+        basic.pause(500)
+        for (let index = 0; index < nbLeds; index++) {
             strip.shift(1)
             strip.setPixelColor(0, neopixel.colors(NeoPixelColors.Blue))
             basic.pause(100)
             strip.show()
-            basic.pause(100)
+            basic.pause(pauseEntreLeds)
         }
+        monteeFinie = 1
     } else if (etat == 2) {
     	
     } else if (etat == 3) {
