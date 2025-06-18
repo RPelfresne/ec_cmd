@@ -23,6 +23,7 @@ strip.setBrightness(40)
 basic.pause(100)
 strip.show()
 basic.pause(100)
+radio.sendString("I")
 basic.forever(function () {
     etat = etat_suivant
     msg_lu = msg
