@@ -1,11 +1,11 @@
 radio.onReceivedString(function (receivedString) {
     msg = receivedString
 })
+let monteeFinie = 0
 let msg_lu = ""
 let etat_suivant = 0
 let etat = 0
 let msg = ""
-let monteeFinie = 0
 radio.setGroup(1)
 let nbLeds = 133
 let dureeMontee = 20000
