@@ -50,6 +50,7 @@ basic.forever(function () {
         basic.pause(200)
         strip.show()
     } else if (etat == 4) {
+        radio.sendString("ST")
         for (let index = 0; index < 5; index++) {
             strip.showColor(neopixel.colors(NeoPixelColors.White))
             basic.pause(100)
