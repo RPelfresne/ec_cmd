@@ -1,7 +1,6 @@
 radio.onReceivedString(function (receivedString) {
     msg = receivedString
 })
-let monteeFinie = 0
 let msg_lu = ""
 let etat_suivant = 0
 let etat = 0
@@ -10,8 +9,6 @@ radio.setGroup(1)
 let nbLeds = 133
 let dureeMontee = 20000
 let delai_rouge = 60000
-let delai_strobo = 3000
-let debut_strobo = 0
 let debut_rouge = 0
 let strip = neopixel.create(DigitalPin.P1, nbLeds, NeoPixelMode.RGB)
 let pauseEntreLeds = dureeMontee / nbLeds
@@ -41,7 +38,6 @@ basic.forever(function () {
             strip.show()
             basic.pause(pauseEntreLeds)
         }
-        monteeFinie = 1
     } else if (etat == 2) {
         radio.sendString("FB")
     } else if (etat == 3) {
@@ -78,7 +74,6 @@ basic.forever(function () {
         if (_millis - debut_rouge >= delai_rouge) {
             if (msg_lu == "S") {
                 etat_suivant = 4
-                debut_strobo = _millis
             }
         }
     } else if (etat == 4) {
