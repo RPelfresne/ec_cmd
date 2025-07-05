@@ -28,14 +28,14 @@ basic.forever(function () {
     _millis = control.millis()
     if (etat == 1) {
         strip.showColor(neopixel.colors(NeoPixelColors.Black))
-        basic.pause(100)
+        basic.pause(50)
         strip.show()
-        basic.pause(200)
+        basic.pause(50)
         radio.sendString("DB")
         for (let index = 0; index < nbLeds; index++) {
             strip.shift(1)
             strip.setPixelColor(0, neopixel.colors(NeoPixelColors.Blue))
-            basic.pause(100)
+            basic.pause(50)
             strip.show()
             basic.pause(pauseEntreLeds)
         }
@@ -44,7 +44,7 @@ basic.forever(function () {
     } else if (etat == 3) {
         radio.sendString("DR")
         strip.showColor(neopixel.colors(NeoPixelColors.Red))
-        basic.pause(200)
+        basic.pause(100)
         strip.show()
     } else if (etat == 4) {
         radio.sendString("FLR")
