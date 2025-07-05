@@ -1,6 +1,7 @@
 radio.onReceivedString(function (receivedString) {
     msg = receivedString
 })
+let PauseAlea = 0
 let msg_lu = ""
 let etat_suivant = 0
 let etat = 0
@@ -50,11 +51,13 @@ basic.forever(function () {
         radio.sendString("FLR")
     } else if (etat == 5) {
         radio.sendString("ST")
-        for (let index = 0; index < 5; index++) {
+        for (let index = 0; index < 20; index++) {
+            PauseAlea = randint(10, 150)
             strip.showColor(neopixel.colors(NeoPixelColors.White))
-            basic.pause(100)
+            basic.pause(PauseAlea)
             strip.showColor(neopixel.colors(NeoPixelColors.Black))
-            basic.pause(100)
+            PauseAlea = randint(10, 150)
+            basic.pause(PauseAlea)
         }
     } else if (etat == 6) {
         strip.showColor(neopixel.colors(NeoPixelColors.Black))
