@@ -2,14 +2,15 @@ radio.onReceivedString(function (receivedString) {
     msg = receivedString
 })
 let PauseAlea = 0
+let SW_ST = 0
 let msg_lu = ""
 let etat_suivant = 0
 let etat = 0
 let msg = ""
 radio.setGroup(1)
 let nbLeds = 133
-let dureeMontee = 20000
-let delai_rouge = 10000
+let dureeMontee = 10000
+let delai_rouge = 5000
 let debut_rouge = 0
 let strip = neopixel.create(DigitalPin.P1, nbLeds, NeoPixelMode.RGB)
 let pauseEntreLeds = dureeMontee / nbLeds
@@ -29,9 +30,9 @@ basic.forever(function () {
     _millis = control.millis()
     if (etat == 1) {
         strip.showColor(neopixel.colors(NeoPixelColors.Black))
-        basic.pause(50)
+        basic.pause(10)
         strip.show()
-        basic.pause(50)
+        basic.pause(10)
         radio.sendString("DB")
         for (let index = 0; index < nbLeds; index++) {
             strip.shift(1)
@@ -45,18 +46,23 @@ basic.forever(function () {
     } else if (etat == 3) {
         radio.sendString("DR")
         strip.showColor(neopixel.colors(NeoPixelColors.Red))
-        basic.pause(100)
+        basic.pause(20)
         strip.show()
     } else if (etat == 4) {
         radio.sendString("FLR")
     } else if (etat == 5) {
-        radio.sendString("ST")
-        for (let index = 0; index < 20; index++) {
-            PauseAlea = randint(10, 150)
+        if (SW_ST == 0) {
+            radio.sendString("ST")
+            SW_ST = 1
+        }
+        for (let index = 0; index < 10; index++) {
+            PauseAlea = randint(20, 200)
+            strip.setBrightness(PauseAlea)
+            PauseAlea = randint(50, 100)
             strip.showColor(neopixel.colors(NeoPixelColors.White))
             basic.pause(PauseAlea)
             strip.showColor(neopixel.colors(NeoPixelColors.Black))
-            PauseAlea = randint(10, 150)
+            PauseAlea = randint(100, 500)
             basic.pause(PauseAlea)
         }
     } else if (etat == 6) {
@@ -91,7 +97,6 @@ basic.forever(function () {
             etat_suivant = 5
         }
     } else if (etat == 5) {
-        basic.showNumber(etat)
         if (msg_lu == "A") {
             etat_suivant = 6
         }
