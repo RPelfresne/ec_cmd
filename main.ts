@@ -9,8 +9,8 @@ let etat = 0
 let msg = ""
 radio.setGroup(1)
 let nbLeds = 133
-let dureeMontee = 10000
-let delai_rouge = 5000
+let dureeMontee = 11000
+let delai_rouge = 60000
 let debut_rouge = 0
 let strip = neopixel.create(DigitalPin.P1, nbLeds, NeoPixelMode.RGB)
 let pauseEntreLeds = dureeMontee / nbLeds
