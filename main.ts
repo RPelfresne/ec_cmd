@@ -16,13 +16,13 @@ let pauseEntreLeds = dureeMontee / nbLeds
 let _millis = control.millis()
 basic.pause(100)
 strip.showColor(neopixel.colors(NeoPixelColors.Black))
-basic.pause(100)
+basic.pause(200)
 strip.setBrightness(40)
-basic.pause(100)
+basic.pause(200)
 strip.show()
 basic.pause(100)
 radio.sendString("I")
-basic.showIcon(IconNames.SmallHeart)
+basic.showIcon(IconNames.Butterfly)
 basic.forever(function () {
     msg_lu = ""
     etat = etat_suivant
@@ -68,8 +68,6 @@ basic.forever(function () {
         basic.pause(10)
         strip.show()
         basic.pause(2000)
-    } else {
-    	
     }
     if (etat == 0) {
         if (msg_lu == "B") {
