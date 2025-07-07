@@ -22,7 +22,7 @@ basic.pause(200)
 strip.show()
 basic.pause(100)
 radio.sendString("I")
-basic.showIcon(IconNames.Butterfly)
+basic.showIcon(IconNames.SmallDiamond)
 basic.forever(function () {
     msg_lu = ""
     etat = etat_suivant
