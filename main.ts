@@ -2,10 +2,9 @@ radio.onReceivedString(function (receivedString) {
     msg = receivedString
 })
 let PauseAlea = 0
-let SW_ST = 0
-let msg_lu = ""
 let etat_suivant = 0
 let etat = 0
+let msg_lu = ""
 let msg = ""
 radio.setGroup(1)
 let nbLeds = 133
@@ -25,15 +24,16 @@ basic.pause(100)
 radio.sendString("I")
 basic.showIcon(IconNames.SmallHeart)
 basic.forever(function () {
+    msg_lu = ""
     etat = etat_suivant
     msg_lu = msg
+    msg = ""
     _millis = control.millis()
     if (etat == 1) {
         strip.showColor(neopixel.colors(NeoPixelColors.Black))
         basic.pause(10)
         strip.show()
         basic.pause(10)
-        radio.sendString("DB")
         for (let index = 0; index < nbLeds; index++) {
             strip.shift(1)
             strip.setPixelColor(0, neopixel.colors(NeoPixelColors.Blue))
@@ -42,19 +42,17 @@ basic.forever(function () {
             basic.pause(pauseEntreLeds)
         }
     } else if (etat == 2) {
-        radio.sendString("FB")
+        strip.showColor(neopixel.colors(NeoPixelColors.Blue))
+        strip.show()
     } else if (etat == 3) {
-        radio.sendString("DR")
         strip.showColor(neopixel.colors(NeoPixelColors.Red))
-        basic.pause(20)
+        basic.pause(10)
         strip.show()
     } else if (etat == 4) {
-        radio.sendString("FLR")
+        strip.showColor(neopixel.colors(NeoPixelColors.Red))
+        basic.pause(10)
+        strip.show()
     } else if (etat == 5) {
-        if (SW_ST == 0) {
-            radio.sendString("ST")
-            SW_ST = 1
-        }
         for (let index = 0; index < 10; index++) {
             PauseAlea = randint(20, 200)
             strip.setBrightness(PauseAlea)
@@ -67,7 +65,7 @@ basic.forever(function () {
         }
     } else if (etat == 6) {
         strip.showColor(neopixel.colors(NeoPixelColors.Black))
-        basic.pause(200)
+        basic.pause(10)
         strip.show()
         basic.pause(2000)
     } else {
@@ -77,24 +75,31 @@ basic.forever(function () {
         if (msg_lu == "B") {
             basic.showNumber(etat)
             etat_suivant = 1
+            radio.sendString("DB")
         }
     } else if (etat == 1) {
         basic.showNumber(etat)
         etat_suivant = 2
+        radio.sendString("FB")
     } else if (etat == 2) {
         basic.showNumber(etat)
-        etat_suivant = 3
-        debut_rouge = _millis
+        if (msg_lu == "LR") {
+            etat_suivant = 3
+            radio.sendString("DR")
+            debut_rouge = _millis
+        }
     } else if (etat == 3) {
         basic.showNumber(etat)
         if (_millis - debut_rouge >= delai_rouge) {
             etat_suivant = 4
             basic.showString("FLR")
+            radio.sendString("FLR")
         }
     } else if (etat == 4) {
         basic.showNumber(etat)
         if (msg_lu == "SR") {
             etat_suivant = 5
+            radio.sendString("ST")
         }
     } else if (etat == 5) {
         if (msg_lu == "A") {
