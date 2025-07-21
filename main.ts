@@ -71,30 +71,24 @@ basic.forever(function () {
     }
     if (etat == 0) {
         if (msg_lu == "B") {
-            basic.showNumber(etat)
             etat_suivant = 1
             radio.sendString("DB")
         }
     } else if (etat == 1) {
-        basic.showNumber(etat)
         etat_suivant = 2
         radio.sendString("FB")
     } else if (etat == 2) {
-        basic.showNumber(etat)
         if (msg_lu == "LR") {
             etat_suivant = 3
             radio.sendString("DR")
             debut_rouge = _millis
         }
     } else if (etat == 3) {
-        basic.showNumber(etat)
         if (_millis - debut_rouge >= delai_rouge) {
             etat_suivant = 4
-            basic.showString("FLR")
             radio.sendString("FLR")
         }
     } else if (etat == 4) {
-        basic.showNumber(etat)
         if (msg_lu == "SR") {
             etat_suivant = 5
             radio.sendString("ST")
@@ -104,6 +98,6 @@ basic.forever(function () {
             etat_suivant = 6
         }
     } else if (etat == 6) {
-        basic.showNumber(etat)
+    	
     }
 })
