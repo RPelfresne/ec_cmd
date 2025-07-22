@@ -14,13 +14,13 @@ let debut_rouge = 0
 let strip = neopixel.create(DigitalPin.P1, nbLeds, NeoPixelMode.RGB)
 let pauseEntreLeds = dureeMontee / nbLeds
 let _millis = control.millis()
-basic.pause(100)
+basic.pause(500)
 strip.showColor(neopixel.colors(NeoPixelColors.Black))
-basic.pause(200)
+basic.pause(10)
 strip.setBrightness(40)
-basic.pause(200)
+basic.pause(10)
 strip.show()
-basic.pause(100)
+basic.pause(10)
 radio.sendString("I")
 basic.showIcon(IconNames.SmallDiamond)
 basic.forever(function () {
